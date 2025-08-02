@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasni & Ranga Wedding Invitation</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #a52a2a;
+      --secondary: #fdf5f5;
+      --dark: #333;
+      --light: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Playfair Display", serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: var(--light);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: -1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 2s ease-in-out;
+      padding: 0 15px;
+    }
+
+    .hero h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: 4.5rem;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .hero h1:hover {
+      color: #ffebcd;
+      transform: scale(1.08);
+      text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.7),
+        0 0 25px rgba(165, 42, 42, 0.6);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+    }
+
+    /* SECTION */
+    section {
+      padding: 80px 20px;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 2.3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    section h2:hover {
+      color: #8b0000;
+      transform: scale(1.08);
+      text-shadow:
+        0 0 15px rgba(165, 42, 42, 0.5),
+        0 0 25px rgba(0, 0, 0, 0.4);
+    }
+
+    section p {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    hr {
+      width: 60%;
+      margin: 30px auto;
+      border: none;
+      border-top: 2px solid var(--primary);
+    }
+
+    /* Wedding Details Cards */
+    .wedding-details {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin: 30px auto 15px;
+    }
+
+    .detail-card {
+      background: var(--secondary);
+      border-radius: 15px;
+      padding: 25px 20px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .detail-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 10px 30px rgba(165, 42, 42, 0.4);
+    }
+
+    .detail-card .icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .detail-card h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .detail-card small {
+      display: block;
+      margin-top: 10px;
+      color: #555;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .note {
+      font-style: italic;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Countdown */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 1.3rem;
+      margin-top: 20px;
+    }
+
+    .count-card {
+      background: var(--secondary);
+      padding: 25px;
+      border-radius: 15px;
+      min-width: 120px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      font-size: 1.4rem;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .count-card:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(165, 42, 42, 0.4);
+    }
+
+    /* SLIDER */
+    .slider {
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .slides {
+      display: flex;
+      width: 500%;
+      animation: slide 20s infinite;
+    }
+
+    .slides.active {
+      animation: slide 20s infinite;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0%);
+      }
+      20% {
+        transform: translateX(-100%);
+      }
+      40% {
+        transform: translateX(-200%);
+      }
+      60% {
+        transform: translateX(-300%);
+      }
+      80% {
+        transform: translateX(-400%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+
+    /* RSVP BUTTON */
+    .rsvp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: var(--light);
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .rsvp-btn:hover {
+      transform: scale(1.1);
+      background: #8b0000;
+    }
+
+    /* MAP */
+    .map-container {
+      margin: 40px auto;
+      max-width: 900px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+
+    /* MUSIC CONTROL */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: var(--light);
+      padding: 25px;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .slides img {
+        height: 300px;
+      }
+
+      .wedding-details {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .detail-card {
+        width: 90%;
+      }
+
+      .countdown {
+        gap: 15px;
+      }
+
+      .count-card {
+        min-width: 80px;
+        padding: 15px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <img src="image/aa8bb3c2-b96b-47c1-bf10-205ea024d92b.jpeg" alt="Couple Hero" class="hero-img" />
+    <div class="hero-content">
+      <h1>Tasni & Ranga</h1>
+      <p>"Two souls, one love, one lifetime together"</p>
+      <p>We joyfully invite you to celebrate the beginning of our forever.</p>
+    </div>
+  </header>
+
+  <!-- WEDDING DETAILS -->
+  <section>
+    <h2>💌 You’re Invited to Share Our Happiness</h2>
+    <div class="wedding-details">
+      <div class="detail-card">
+        <span class="icon">📅</span>
+        <h3>Wedding Date</h3>
+        <p><strong>Friday, 05th September 2025</strong></p>
+      </div>
+      <div class="detail-card">
+        <span class="icon">🌸</span>
+        <h3>Poruwa Ceremony</h3>
+        <p>9.55 a.m.</p>
+      </div>
+      <div class="detail-card">
+        <span class="icon">🎉</span>
+        <h3>Reception</h3>
+        <p>10.30 a.m. – 3.30 p.m.</p>
+      </div>
+      <div class="detail-card" onclick="window.open('https://www.google.com/maps/place/Vinrich+Lake+Resort/@6.7604385,79.9300511,17z/data=!3m1!4b1!4m9!3m8!1s0x3ae24f6563d926a3:0x2abebc069813ec27!5m2!4m1!1i2!8m2!3d6.7604385!4d79.9300511!16s%2Fg%2F11b7xpt_xn?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D', '_blank')" title="Open location in Google Maps" style="cursor:pointer;">
+        <span class="icon">💍</span>
+        <h3>Venue</h3>
+        <p><strong>The Vinrich Hotel</strong><br />
+        Lake Resort, River Bank Chatcau Hall,<br />
+        Duwawata Rd, Piliyandala</p>
+        <small>📍 Lat: 6°43'35.4"N | Long: 80°09'09.0"E</small>
+      </div>
+    </div>
+    <p class="note">
+      <em>Join us as we unite in love and celebrate this blessed occasion with our family and friends.</em>
+    </p>
+  </section>
+
+  <!-- IMAGE SLIDER -->
+  <section class="engaged">
+    <h2>Engaged in Love</h2>
+    <p><i>With joy in our hearts and dreams for tomorrow, we begin our forever today.</i></p>
+    <div class="slider">
+      <div class="slides">
+        <img src="image/a0065998-62a0-4adb-9917-bf2abe7fd81f.jpeg" alt="Couple 1" />
+        <img src="image/aa8bb3c2-b96b-47c1-bf10-205ea024d92b.jpeg" alt="Couple 2 blur" />
+        <img src="image/49861926-0f84-4e19-9eae-44bf8a954fa2.jpeg" alt="Couple 2" />
+        <img src="image/c81d905a-f315-4bcb-b1de-c5b1e1ad90e8.jpeg" alt="Couple 3" />
+        <img src="image/13fe63a4-7bda-4764-83aa-902e873f87a1.jpeg" alt="Couple 4" />
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section>
+    <h2>Counting the Days Until Forever Begins</h2>
+    <p>Because every second brings us closer to the most beautiful day of our lives.</p>
+    <div class="countdown" id="countdown">
+      <div class="count-card"><span id="days">0</span><br />Days</div>
+      <div class="count-card"><span id="hours">0</span><br />Hours</div>
+      <div class="count-card"><span id="minutes">0</span><br />Minutes</div>
+      <div class="count-card"><span id="seconds">0</span><br />Seconds</div>
+    </div>
+  </section>
+
+  <!-- FAMILY INFO -->
+  <section>
+    <h2>With Love</h2>
+    <p><strong>The Bride</strong></p>
+    <p>🌸 Tasni<br />Beloved daughter of<br />Mr. Ranjith Jayasinghe &amp; Mrs. Hemamalani Jayasinghe</p>
+    <hr />
+    <p><strong>The Groom</strong></p>
+    <p>💍 Ranga<br />Cherished son of<br />Mr. Premadasa Lankathilaka &amp; Mrs. Suneetha Lankathilaka</p>
+  </section>
+
+  <!-- MAP -->
+  <section>
+    <h2>Find Us Here</h2>
+    <div class="map-container">
+        <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.0867816545056!2d79.93005109999999!3d6.760438499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae24f6563d926a3%3A0x2abebc069813ec27!2sVinrich%20Lake%20Resort!5e0!3m2!1sen!2slk!4v1691234567890"
+  width="100%"
+  height="400"
+  style="border:0;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade"
+  title="Vinrich Lake Resort Map"
+></iframe>
+
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <a href="#footer" class="rsvp-btn" id="rsvp-btn">📞 RSVP Now</a>
+
+  <!-- MUSIC CONTROL -->
+  <div class="music-control" id="music-control" title="Toggle Music">🎵</div>
+  <audio id="bg-music" autoplay muted loop>
+    <source src="song/WhatsApp Audio 2025-08-02 at 08.05.42.mpeg" type="audio/mpeg" />
+    <!-- Fallback text -->
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- SOUND EFFECT -->
+  <audio id="highlight-sound" preload="auto">
+    <source src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" type="audio/ogg" />
+  </audio>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <p>Your presence is our greatest gift.<br />Kindly RSVP (Regrets Only) by August 25, 2025</p>
+    <p>Tasni: 076-8257010 | Ranga: 071-1467741</p>
+    <p>❤️ Together with our families, we can’t wait to share this joyous day with you.</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    // Countdown timer
+    const weddingDate = new Date("Sep 5, 2025 09:55:00").getTime();
+
+    const countdownFunc = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdownFunc);
+        document.getElementById("countdown").innerHTML =
+          "<h3>It's Our Wedding Day! 🎉</h3>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }, 1000);
+
+    // Music autoplay muted → unmute on user interaction
+    const music = document.getElementById("bg-music");
+    const control = document.getElementById("music-control");
+    let playing = false;
+
+    const unmuteAndPlay = () => {
+      music.muted = false;
+      music.play().catch(() => {});
+      playing = true;
+      control.innerText = "⏸️";
+      document.removeEventListener("scroll", unmuteAndPlay);
+      document.removeEventListener("click", unmuteAndPlay);
+      document.removeEventListener("touchstart", unmuteAndPlay);
+    };
+
+    document.addEventListener("scroll", unmuteAndPlay, { once: true });
+    document.addEventListener("click", unmuteAndPlay, { once: true });
+    document.addEventListener("touchstart", unmuteAndPlay, { once: true });
+
+    // Toggle music manually
+    control.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (playing) {
+        music.pause();
+        control.innerText = "🎵";
+      } else {
+        music.muted = false;
+        music.play();
+        control.innerText = "⏸️";
+      }
+      playing = !playing;
+    });
+
+    // Highlight sound effect on heading clicks
+    const highlightSound = document.getElementById("highlight-sound");
+    function playHighlightSound() {
+      highlightSound.currentTime = 0;
+      highlightSound.play().catch(() => {});
+    }
+    document.querySelector(".hero h1").addEventListener("click", playHighlightSound);
+    document.querySelectorAll("section h2").forEach((h2) => {
+      h2.addEventListener("click", playHighlightSound);
+    });
+
+    // Slider animation start on click
+    const slides = document.querySelector(".slides");
+    document.querySelector("section.engaged").addEventListener("click", () => {
+      slides.classList.add("active");
+    });
+  </script>
+</body>
+</html>
