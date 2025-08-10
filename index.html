@@ -209,6 +209,38 @@
       margin: auto;
     }
 
+    /* GOLD fixed header after scroll */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  color: gold !important;
+  text-align: center;
+  font-size: 2rem;
+  padding: 10px 0;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: white;
+  animation: blink 1s infinite;
+  cursor: pointer;
+}
+
+    @keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
     .slides {
       display: flex;
       width: 500%;
@@ -226,25 +258,14 @@
     }
 
     @keyframes slide {
-      0% {
-        transform: translateX(0%);
-      }
-      20% {
-        transform: translateX(-100%);
-      }
-      40% {
-        transform: translateX(-200%);
-      }
-      60% {
-        transform: translateX(-300%);
-      }
-      80% {
-        transform: translateX(-400%);
-      }
-      100% {
-        transform: translateX(0%);
-      }
-    }
+  0% { transform: translateX(0%); }
+  20% { transform: translateX(-100%); }
+  40% { transform: translateX(-200%); }
+  60% { transform: translateX(-300%); }
+  80% { transform: translateX(-400%); }
+  90% { transform: translateX(-400%); }
+  100% { transform: translateX(0%); }
+}
 
     /* RSVP BUTTON */
     .rsvp-btn {
@@ -360,6 +381,7 @@
       <h1>Tasni & Ranga</h1>
       <p>"Two souls, one love, one lifetime together"</p>
       <p>We joyfully invite you to celebrate the beginning of our forever.</p>
+
     </div>
   </header>
 
@@ -452,7 +474,7 @@
   </section>
 
   <!-- RSVP -->
-  <a href="#footer" class="rsvp-btn" id="rsvp-btn">📞 RSVP Now</a>
+  <div class="scroll-indicator" id="scroll-indicator">📥</div> <a href="#footer" class="rsvp-btn" id="rsvp-btn">📞 RSVP Now</a>
 
   <!-- MUSIC CONTROL -->
   <div class="music-control" id="music-control" title="Toggle Music">🎵</div>
@@ -552,6 +574,44 @@
     document.querySelector("section.engaged").addEventListener("click", () => {
       slides.classList.add("active");
     });
+
+      // Scroll effect for fixed header
+const heroName = document.querySelector(".hero h1");
+let isFixed = false;
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100 && !isFixed) {
+    heroName.classList.add("fixed-header");
+    isFixed = true;
+  } else if (window.scrollY <= 100 && isFixed) {
+    heroName.classList.remove("fixed-header");
+    isFixed = false;
+  }
+});
+
+// Mobile scroll indicator hide on scroll
+const scrollIndicator = document.getElementById("scroll-indicator");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    scrollIndicator.style.display = "none";
+  }
+});
+
+// Fix slideshow restart delay
+const slider = document.querySelector(".slides");
+let slideIndex = 0;
+const slideImages = document.querySelectorAll(".slides img");
+const totalSlides = slideImages.length;
+
+function showSlides() {
+  slideIndex++;
+  if (slideIndex >= totalSlides) {
+    slideIndex = 0;
+  }
+  slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+}
+setInterval(showSlides, 4000); // Each image stays for 4 seconds, restart after 2 sec
+
   </script>
 </body>
 </html>
