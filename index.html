@@ -241,15 +241,11 @@
   25%, 75% { opacity: 0; }
 }
 
-    .slides {
-      display: flex;
-      width: 500%;
-      animation: slide 20s infinite;
-    }
-
-    .slides.active {
-      animation: slide 20s infinite;
-    }
+.slides {
+  display: flex;
+  width: 500%;
+  animation: slide 5s linear infinite;
+}
 
     .slides img {
       width: 100%;
@@ -257,15 +253,15 @@
       object-fit: cover;
     }
 
-    @keyframes slide {
+ @keyframes slide {
   0% { transform: translateX(0%); }
-  20% { transform: translateX(-100%); }
-  40% { transform: translateX(-200%); }
-  60% { transform: translateX(-300%); }
-  80% { transform: translateX(-400%); }
-  90% { transform: translateX(-400%); }
-  100% { transform: translateX(0%); }
+  20% { transform: translateX(-20%); }
+  40% { transform: translateX(-10%); }
+  60% { transform: translateX(-60%); }
+  80% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); } /* Immediately jumps back to start */
 }
+
 
     /* RSVP BUTTON */
     .rsvp-btn {
@@ -371,9 +367,71 @@
         font-size: 1.2rem;
       }
     }
+
+      /* Loader Overlay */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* Heart shape */
+.heart {
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary);
+  position: relative;
+  transform: rotate(-45deg);
+  animation: beat 1.2s infinite ease-in-out;
+  cursor: default;
+}
+
+/* Create heart shape with pseudo elements */
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary);
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -40px;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 40px;
+}
+
+/* Heart beat animation */
+@keyframes beat {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.15);
+  }
+}
+
   </style>
 </head>
 <body>
+<!-- Loader Overlay -->
+<div id="loader">
+    <div class="heart"></div>
+</div>
+
   <!-- HERO -->
   <header class="hero">
     <img src="image/aa8bb3c2-b96b-47c1-bf10-205ea024d92b.jpeg" alt="Couple Hero" class="hero-img" />
@@ -474,7 +532,7 @@
   </section>
 
   <!-- RSVP -->
-  <div class="scroll-indicator" id="scroll-indicator">📥</div> <a href="#footer" class="rsvp-btn" id="rsvp-btn">📞 RSVP Now</a>
+  <div class="scroll-indicator" id="scroll-indicator">📩</div> <a href="#footer" class="rsvp-btn" id="rsvp-btn">📞 RSVP Now</a>
 
   <!-- MUSIC CONTROL -->
   <div class="music-control" id="music-control" title="Toggle Music">🎵</div>
@@ -611,6 +669,15 @@ function showSlides() {
   slider.style.transform = `translateX(-${slideIndex * 100}%)`;
 }
 setInterval(showSlides, 4000); // Each image stays for 4 seconds, restart after 2 sec
+// Hide loader once page fully loaded
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  loader.style.transition = 'opacity 0.5s ease';
+  loader.style.opacity = '0';
+  setTimeout(() => {
+    loader.style.display = 'none';
+  }, 500);
+});
 
   </script>
 </body>
